@@ -6,7 +6,7 @@ import { RotateCcw, Bike, ChevronRight, ChevronLeft, Target, Usb } from 'lucide-
 // GAME CONFIGURATION
 const MAX_LEVEL = 100;
 const DECAY_RATE = 40; // Units drop per second
-const TARGET_RPM = 60; // RPM needed to counteract decay
+const TARGET_RPM = 400; // RPM needed to counteract decay
 const TOTAL_TIME = 30; // Seconds for a single session
 const PERFECT_MIN = 50; // 50%
 const PERFECT_MAX = 80; // 80%
@@ -111,7 +111,7 @@ export default function GamePage() {
     let currentRpm = telemetryRef.current.rpm;
     if (telemetrySourceRef.current === 'mock') {
         currentRpm = simulatedRpmRef.current;
-        simulatedRpmRef.current = Math.max(0, simulatedRpmRef.current - 40 * dt); 
+        simulatedRpmRef.current = Math.max(0, simulatedRpmRef.current - 200 * dt); 
     }
     
     setDisplayRpm(currentRpm);
@@ -123,7 +123,7 @@ export default function GamePage() {
         fillLevelRef.current = Math.max(0, fillLevelRef.current - DECAY_RATE * dt);
         setFillLevel(fillLevelRef.current);
       }
-      if (currentRpm >= 15) {
+      if (currentRpm >= 50) {
         setGameState('playing');
         fillLevelRef.current = 10;
       }
@@ -160,7 +160,7 @@ export default function GamePage() {
 
   const pedal = useCallback(() => {
     if (telemetrySourceRef.current === 'mock') {
-      simulatedRpmRef.current = Math.min(150, simulatedRpmRef.current + 18);
+      simulatedRpmRef.current = Math.min(800, simulatedRpmRef.current + 120);
     }
   }, []);
 
