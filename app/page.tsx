@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { RotateCcw, Bike, ChevronRight, ChevronLeft, Target, Usb } from 'lucide-react';
+import { RotateCcw, Bike, Target, Usb } from 'lucide-react';
 
 // GAME CONFIGURATION
 const MAX_LEVEL = 100;
@@ -233,44 +233,26 @@ export default function GamePage() {
         
         <div className="flex flex-row md:flex-col gap-4 md:gap-12 w-full md:w-64 text-white font-mono justify-between md:justify-center px-4 md:px-0">
           <div className="flex flex-col gap-1 md:gap-2">
-            <span className="text-[10px] uppercase text-slate-500 tracking-[0.3em] font-bold">Session Time</span>
-            <div className={`text-4xl md:text-6xl font-black italic tracking-tighter flex items-baseline gap-1 md:gap-2 ${timeLeft <= 5 ? 'text-orange-400 animate-pulse' : 'text-white'}`}>
-              {Math.ceil(timeLeft)}<span className="text-xl md:text-3xl font-bold text-blue-500/50 not-italic">s</span>
+            <span className="text-xs md:text-sm uppercase text-slate-500 tracking-[0.3em] font-bold">Session Time</span>
+            <div className={`text-6xl md:text-8xl font-black italic tracking-tighter flex items-baseline gap-1 md:gap-2 ${timeLeft <= 5 ? 'text-orange-400 animate-pulse' : 'text-white'}`}>
+              {Math.ceil(timeLeft)}<span className="text-2xl md:text-4xl font-bold text-blue-500/50 not-italic">s</span>
             </div>
           </div>
           
           <div className="flex flex-col gap-1 md:gap-2 text-right md:text-left">
-            <span className="text-[10px] uppercase text-slate-500 tracking-[0.3em] font-bold flex items-center justify-end md:justify-start gap-2">
-              <Target className="w-4 h-4 text-emerald-400" /> System Perfect
+            <span className="text-xs md:text-sm uppercase text-slate-500 tracking-[0.3em] font-bold flex items-center justify-end md:justify-start gap-2">
+              <Target className="w-5 h-5 text-emerald-400" /> System Perfect
             </span>
-            <div className="text-2xl md:text-4xl font-black italic tracking-tighter text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]">
-              {perfectTime.toFixed(1)}<span className="text-sm md:text-xl font-bold text-emerald-500/50 not-italic ml-1">s</span>
+            <div className="text-4xl md:text-6xl font-black italic tracking-tighter text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]">
+              {perfectTime.toFixed(1)}<span className="text-lg md:text-2xl font-bold text-emerald-500/50 not-italic ml-1">s</span>
             </div>
           </div>
         </div>
 
         <div className="flex-1 flex justify-center items-center h-full max-h-[600px] w-full min-h-[300px] relative pointer-events-none">
-          <div className="relative h-full py-4 md:py-12 flex justify-center w-full max-w-[12rem] md:max-w-xs" style={{ transform: 'skewX(-10deg)' }}>
-            
-            <div className="absolute left-[-50px] md:left-[-70px] flex items-center justify-end w-[40px] md:w-[60px] drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]" style={{ bottom: '50%', height: '30%' }}>
-              <div className="flex flex-col items-end text-emerald-400 font-bold whitespace-nowrap" style={{ transform: 'skewX(10deg)' }}>
-                <span className="text-[10px] md:text-xs uppercase tracking-wider mb-[-4px]">Phase</span>
-                <span className="text-[10px] md:text-xs uppercase tracking-wider mb-1">Optimum</span>
-                <ChevronRight className="w-5 h-5 md:w-6 md:h-6 -mt-1 md:-mt-2 opacity-80" />
-              </div>
-            </div>
+          <div className="relative h-full py-4 md:py-8 flex justify-center w-full max-w-xs md:max-w-sm" style={{ transform: 'skewX(-10deg)' }}>
 
-            <div className="absolute right-[-50px] md:right-[-70px] flex items-center justify-start w-[40px] md:w-[60px] drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]" style={{ bottom: '50%', height: '30%' }}>
-              <div className="flex flex-col items-start text-emerald-400 font-bold whitespace-nowrap" style={{ transform: 'skewX(10deg)' }}>
-                <div className="flex items-center -ml-1 md:-ml-2 mb-[-4px]">
-                  <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 opacity-80" />
-                  <span className="text-[10px] md:text-xs uppercase tracking-wider">Phase</span>
-                </div>
-                <span className="text-[10px] md:text-xs uppercase tracking-wider ml-4 md:ml-5">Optimum</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col-reverse w-20 md:w-32 h-[100%] gap-[6px] md:gap-2 relative z-10 bg-slate-900/80 p-2 md:p-3 rounded-xl border-2 border-slate-800 shadow-[0_0_40px_rgba(30,58,138,0.2)] backdrop-blur-md">
+            <div className="flex flex-col-reverse w-40 md:w-64 h-[100%] gap-[6px] md:gap-2 relative z-10 bg-slate-900/80 p-2 md:p-3 rounded-xl border-2 border-slate-800 shadow-[0_0_40px_rgba(30,58,138,0.2)] backdrop-blur-md">
               {segments.map((seg) => (
                 <div key={seg.id} className={`w-full flex-1 relative overflow-hidden rounded-[2px] border ${seg.emptyColor} bg-slate-900/60 transition-all ${seg.fillP > 0 ? '' : 'grayscale'}`}>
                   <div 
@@ -309,20 +291,20 @@ export default function GamePage() {
 
           {gameState === 'playing' && (
             <div className="flex flex-col gap-2">
-              <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-500">System Status</div>
+              <div className="text-xs md:text-sm uppercase tracking-[0.3em] font-bold text-slate-500">System Status</div>
               <div className={`text-4xl md:text-5xl font-black italic tracking-tighter uppercase leading-none transition-colors ${fillLevel > 80 ? 'text-orange-500 drop-shadow-[0_0_15px_rgba(249,115,22,0.6)]' : fillLevel >= 50 ? 'text-emerald-400 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]' : 'text-blue-400 drop-shadow-[0_0_15px_rgba(37,99,235,0.4)]'}`}>
                 {fillLevel > 80 ? 'OVERHEATING' : fillLevel >= 50 ? 'OPTIMAL' : 'ACCELERATE'}
               </div>
               <div className="mt-3 md:mt-4 flex flex-col md:flex-row items-center md:items-start md:justify-start gap-4 text-slate-400 font-mono uppercase tracking-widest bg-slate-900/40 p-4 rounded-xl border border-slate-800">
-                <Bike className={`w-8 h-8 md:w-10 md:h-10 shrink-0 ${fillLevel >= 50 && fillLevel <=80 ? 'text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)] animate-pulse' : 'text-slate-500'}`} />
-                <div className="flex flex-col items-center md:items-start gap-2">
+                <Bike className={`w-10 h-10 md:w-14 md:h-14 shrink-0 ${fillLevel >= 50 && fillLevel <=80 ? 'text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)] animate-pulse' : 'text-slate-500'}`} />
+                <div className="flex flex-col items-center md:items-start gap-3">
                   <div className="font-bold flex items-baseline gap-2 leading-none">
-                    <span className="text-3xl text-white not-italic font-black">{Math.floor(displayRpm)}</span>
-                    <span className="text-blue-500/50 text-[10px]">RPM</span>
+                    <span className="text-5xl md:text-6xl text-white not-italic font-black">{Math.floor(displayRpm)}</span>
+                    <span className="text-blue-500/50 text-sm md:text-base">RPM</span>
                   </div>
                   <div className="font-bold flex items-baseline gap-2 leading-none">
-                    <span className={`text-xl not-italic font-black ${fillLevel >= 50 && fillLevel <= 80 ? 'text-emerald-400' : 'text-slate-300'}`}>{Math.floor(fillLevel)}</span>
-                    <span className="text-blue-500/50 text-[10px]">PWR</span>
+                    <span className={`text-3xl md:text-4xl not-italic font-black ${fillLevel >= 50 && fillLevel <= 80 ? 'text-emerald-400' : 'text-slate-300'}`}>{Math.floor(fillLevel)}</span>
+                    <span className="text-blue-500/50 text-sm md:text-base">PWR</span>
                   </div>
                 </div>
               </div>
